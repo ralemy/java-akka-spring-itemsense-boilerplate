@@ -7,11 +7,18 @@ It uses Akka actors to spawn a new thread for handling messages.
 
 To configure, put a file called application.properties in classpath which 
 has a key family of itemsense containing baseUrl, username, and password
-keys:
+keys.
 
+Forexample: `src/main/resources/application.properties`
 
 ```
 itemsense.baseUrl: http://<example,com>/
 itemsense.username: myusername
 itemsense.password: mypassword
+```
+
+
+other configuration keys can be specified in the same file for other families: 
+```
+server.port:8080
 ```
