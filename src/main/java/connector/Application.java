@@ -1,4 +1,4 @@
-package hello;
+package connector;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -7,6 +7,7 @@ import com.impinj.rtls.actors.QueueService;
 import com.impinj.rtls.itemsense.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,16 +23,17 @@ public class Application implements CommandLineRunner {
     private Api itemsense;
     private ActorRef amqp;
 
+    @Autowired
+    private ItemsenseProperties config;
 
     public static void main(String args[]) {
         SpringApplication.run(Application.class);
     }
 
     public void run(String... args) throws Exception {
-
-        itemsense = new Api("http://intelligentinsites.sandbox.itemsense.impinj.net/", "admin", "admindefault");
+        itemsense = new Api(config.baseUrl,config.username,config.password);
         amqp = startAMQPActor();
-        amqp.tell(new QueueListener.Start(itemsense,"admin","admindefault"),null);
+        amqp.tell(new QueueListener.Start(itemsense,config.username,config.password),null);
     }
     private ActorRef startAMQPActor(){
         ApplicationContext ctx =

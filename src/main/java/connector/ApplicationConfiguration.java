@@ -1,4 +1,4 @@
-package hello;
+package connector;
 
 import akka.actor.ActorSystem;
 import org.springframework.beans.factory.annotation.Autowired;
