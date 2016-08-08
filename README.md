@@ -10,8 +10,8 @@ has a key family of itemsense containing baseUrl, username, and password
 keys:
 
 
-'''
+```
 itemsense.baseUrl: http://<example,com>/
 itemsense.username: myusername
 itemsense.password: mypassword
-'''
+```
